@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { UserProfileType } from "@/app/_interface/home";
 import { createAsyncThunk , createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { useState } from "react";
@@ -7,12 +8,14 @@ let initialState:
     {
         userToken: null | string,
         userData: null | any,
+        userProfile: UserProfileType | null,
         isLoading: boolean | string,
         isError: boolean | string 
     } =
 {
     userToken: null,
     userData: null,
+    userProfile:null,
     isLoading: false,
     isError:false
 };
@@ -121,17 +124,21 @@ let authSlice=createSlice({
             state.isError = action.payload;
             state.isLoading = false;
         })
-        builder.addCase(userRegister.fulfilled, (state, action) => {
-            state.userToken = action.payload;
-            state.isLoading = false;
+        builder.addCase(profileData.fulfilled, (state, action) => {
+            console.log("ACA",action.payload.user);
+            state.userProfile=action.payload.user
         })
-        builder.addCase(userRegister.pending, (state, action) => {
-            state.isLoading = true;
-        })
-        builder.addCase(userRegister.rejected, (state, action) => {
-            state.isError = action.payload;
-            state.isLoading = false;
-        })
+        // builder.addCase(userRegister.fulfilled, (state, action) => {
+        //     state.userToken = action.payload;
+        //     state.isLoading = false;
+        // })
+        // builder.addCase(userRegister.pending, (state, action) => {
+        //     state.isLoading = true;
+        // })
+        // builder.addCase(userRegister.rejected, (state, action) => {
+        //     state.isError = action.payload;
+        //     state.isLoading = false;
+        // })
     },
     reducers: {
         cleanData: function (state, action) {

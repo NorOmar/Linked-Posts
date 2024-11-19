@@ -20,3 +20,14 @@ export type CommentsType = {
     createdAt: string;
     commentCreator: UserType;
 }
+
+export type UserProfileType = {
+    createdAt: string;
+    dateOfBirth: string;
+    email: string;
+    gender: string;
+    name: string;
+    passwordChangedAt: string;
+    photo: string;
+    _id: string;
+}

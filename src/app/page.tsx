@@ -18,6 +18,7 @@ export default function Home() {
   let dispatch = useDispatch<typeof store.dispatch>();
   let { Allposts } = useSelector((state: ReturnType<typeof store.getState>) => state.posts);
 
+  
   const handleFileChange = (event: any) => {
     formik.setFieldValue('image', event.currentTarget.files[0]);
     // console.log(event.currentTarget.files[0]);
@@ -47,6 +48,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getAllPosts());
+    
   },[])
   return (
     <>
